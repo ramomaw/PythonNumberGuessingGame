@@ -1,11 +1,17 @@
 import random
+x = int(input("enter the lowest number:"))
+y = int(input("enter the highest number:"))
 
-random_number = random.randint(1, 100) 
+if x > y:
+    print(f"please enter a number bigger than {x}")
+    y = int(input("enter the highest number"))
+
+random_number = random.randint(x, y) 
 guess_count = 0 
 right_guess = 0
 
 while right_guess != random_number:
-    print("enter your guess between 1 and 100")
+    print(f"enter your guess between {x} and {y} ")
     right_guess = int(input()) 
     guess_count += 1
     if right_guess > random_number:
