@@ -1,23 +1,37 @@
 import random
-x = int(input("enter the lowest number:"))
-y = int(input("enter the highest number:"))
 
-if x > y:
-    print(f"please enter a number bigger than {x}")
-    y = int(input("enter the highest number"))
+def get_integer_input(prompt):
+    while True:
+        try:
+            return int(input(prompt))
+        except ValueError:
+            print("Invalid input. Please enter a valid whole number.")
 
-random_number = random.randint(x, y) 
-guess_count = 0 
-right_guess = 0
+def main():
+    x = get_integer_input("Enter the lowest number: ")
+    
+    while True:
+        y = get_integer_input("Enter the highest number: ")
+        if y >= x:
+            break
+        print(f"Please enter a number greater than or equal to {x}.")
 
-while right_guess != random_number:
-    print(f"enter your guess between {x} and {y} ")
-    right_guess = int(input()) 
-    guess_count += 1
-    if right_guess > random_number:
-        print("your guess is bigger than the correct answer")
-    elif right_guess < random_number:
-        print("your guess is smaller than the correct answer")
-else:
-    print("you got the correct guess, your number of guesses are:")
-    print(guess_count)
+    random_number = random.randint(x, y) 
+    guess_count = 0 
+    right_guess = None
+
+    print(f"\nA random number between {x} and {y} has been generated.")
+
+    while right_guess != random_number:
+        right_guess = get_integer_input(f"Enter your guess between {x} and {y}: ") 
+        guess_count += 1
+        
+        if right_guess > random_number:
+            print("Your guess is bigger than the correct answer.")
+        elif right_guess < random_number:
+            print("Your guess is smaller than the correct answer.")
+
+    print(f"\nYou got the correct guess. Your total number of guesses is: {guess_count}")
+
+if __name__ == "__main__":
+    main()
